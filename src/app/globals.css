@@ -21,6 +21,14 @@
   /* Glass utility */
   --glass-bg: color-mix(in oklab, white 6%, transparent);
   --glass-border: color-mix(in oklab, white 15%, transparent);
+
+
+    /* Footer */
+      --footer-bg: #0f172a;
+      --footer-border: #1e293b;
+      --footer-text-muted: #94a3b8;
+      --footer-text-dim: #64748b;
+      --footer-icon-bg: #1e293b;
 }
 
 /* Expose tokens to Tailwind v4 utilities */
@@ -39,6 +47,13 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-border: var(--footer-border);
+  --color-footer-muted: var(--footer-text-muted);
+  --color-footer-dim: var(--footer-text-dim);
+  --color-footer-icon-bg: var(--footer-icon-bg);
 }
 
 /* ========== Base ========== */
@@ -63,3 +78,4 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
 }
+
