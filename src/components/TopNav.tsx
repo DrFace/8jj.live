@@ -21,7 +21,7 @@ export default function TopNav({
       >
         {/* Left banner image (Figma: 932 x 52) */}
         <img
-          src="/images/topnav/8jj.gif"
+          src="/images/topnav/topnav.gif"
           alt=""
           className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
           draggable={false}
