@@ -37,7 +37,7 @@ export default function Footer() {
             <img
               src="/images/footer/8jj.png"
               alt="8jj"
-              className="w-[78px] h-[78px] object-contain"
+              className="w-19.5 h-19.5 object-contain"
               draggable={false}
             />
 
@@ -52,7 +52,7 @@ export default function Footer() {
             </div>
 
             {/* Description */}
-            <p className="mt-4 text-footer-muted text-[11.9px] font-normal font-['Inter'] leading-[22px] max-w-[430px]">
+            <p className="mt-4 text-footer-muted text-[11.9px] font-normal font-['Inter'] leading-5.5 max-w-107.5">
               The ultimate destination for sports fans. Watch live matches, get
               real-time scores, and join the conversation with millions of fans
               worldwide.
@@ -61,8 +61,8 @@ export default function Footer() {
             {/* Social icons (use your exported SVGs) */}
             <div className="mt-6 flex items-center gap-4">
               {[
-                "/images/footer/Frame-1.svg",
-                "/images/footer/Frame-2.svg",
+                "/images/footer/Frame-6.svg",
+                "/images/footer/Frame-5.svg",
                 "/images/footer/Frame-3.svg",
                 "/images/footer/Frame-4.svg",
               ].map((src) => (
@@ -123,7 +123,7 @@ export default function Footer() {
                 <img
                   src="/images/footer/Frame-2.svg"
                   alt=""
-                  className="w-5 h-5 mt-[1px]"
+                  className="w-5 h-5 mt-px"
                   draggable={false}
                 />
                 <p className="text-footer-muted text-[11.9px] font-normal font-['Inter'] leading-5">
@@ -136,7 +136,7 @@ export default function Footer() {
                 <img
                   src="/images/footer/Frame-1.svg"
                   alt=""
-                  className="w-5 h-5 mt-[1px]"
+                  className="w-5 h-5 mt-px"
                   draggable={false}
                 />
                 <p className="text-footer-muted text-[11.9px] font-normal font-['Inter'] leading-5">
@@ -149,7 +149,7 @@ export default function Footer() {
                 <img
                   src="/images/footer/Frame.svg"
                   alt=""
-                  className="w-5 h-5 mt-[1px]"
+                  className="w-5 h-5 mt-px"
                   draggable={false}
                 />
                 <p className="text-footer-muted text-[11.9px] font-normal font-['Inter'] leading-5">
