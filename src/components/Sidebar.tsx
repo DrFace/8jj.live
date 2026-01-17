@@ -3,98 +3,134 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
+import type { LucideIcon } from "lucide-react";
 import {
   Home,
   Radio,
-  Trophy,
-  Sparkles,
+  Target,
+  Goal,
+  Bolt,
+  Video,
   Newspaper,
   Users,
-  CalendarDays,
+  Calendar,
   Star,
   PlaySquare,
   Gift,
-  Gamepad2,
+  Trophy,
   Headphones,
-  ListChecks,
 } from "lucide-react";
 
-const nav = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/live/icc-world-cup-final", label: "Live", icon: Radio },
-  { href: "/cricket", label: "Cricket", icon: Trophy },
-  { href: "/football", label: "Football", icon: Sparkles },
-  { href: "/basketball", label: "Basketball", icon: Sparkles },
-  { href: "/highlights", label: "Highlights", icon: PlaySquare },
-  { href: "/news", label: "News", icon: Newspaper },
-  { href: "/community", label: "Community", icon: Users },
-  { href: "/schedule", label: "Broadcast Schedule", icon: CalendarDays },
-  { href: "/events", label: "Featured Events", icon: Star },
-  { href: "/shorts", label: "Short Video", icon: PlaySquare },
-  { href: "/present", label: "Present", icon: Gift },
-  { href: "/games", label: "Games", icon: Gamepad2 },
-  { href: "/support", label: "Customer Service", icon: Headphones },
-  { href: "/match-schedule", label: "Match Schedule", icon: ListChecks },
+type NavItem = {
+  href: string;
+  label: string;
+  Icon: LucideIcon;
+  top: number; // absolute top in px
+  fontWeight?: "font-normal" | "font-medium";
+};
+
+const NAV: NavItem[] = [
+  { href: "/", label: "Home", Icon: Home, top: 76 },
+  { href: "/live/icc-world-cup-final", label: "Live", Icon: Radio, top: 126 },
+  { href: "/cricket", label: "Cricket", Icon: Target, top: 178 },
+  { href: "/football", label: "Football", Icon: Goal, top: 232 },
+  { href: "/basketball", label: "Basketball", Icon: Bolt, top: 285 },
+  {
+    href: "/highlights",
+    label: "Highlights",
+    Icon: Video,
+    top: 342,
+    fontWeight: "font-medium",
+  },
+  { href: "/news", label: "News", Icon: Newspaper, top: 398 },
+  { href: "/community", label: "Community", Icon: Users, top: 453 },
+  { href: "/schedule", label: "Broadcast Schedule", Icon: Calendar, top: 507 },
+  { href: "/events", label: "Featured Events", Icon: Star, top: 563 },
+  { href: "/shorts", label: "Short Video", Icon: PlaySquare, top: 617 },
+  { href: "/present", label: "Present", Icon: Gift, top: 671 },
+  { href: "/games", label: "Games", Icon: Trophy, top: 726 },
+  {
+    href: "/match-schedule",
+    label: "Match Schedule",
+    Icon: Calendar,
+    top: 779,
+  },
+  { href: "/support", label: "Customer Service", Icon: Headphones, top: 836 },
 ];
+
+function isActive(pathname: string, href: string) {
+  if (pathname === href) return true;
+  if (href.startsWith("/live") && pathname.startsWith("/live")) return true;
+  if (href.startsWith("/news") && pathname.startsWith("/news")) return true;
+  return false;
+}
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="glass rounded-2xl p-4 h-full overflow-auto">
-      <div className="flex items-center gap-2 px-2 pb-4">
-        <div className="h-9 w-9 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center">
-          <span className="text-cyan-200 font-semibold">S</span>
-        </div>
-        <div>
-          <div className="text-sm font-semibold tracking-wide">SPORT</div>
-          <div className="text-xs text-slate-300">STREAM</div>
+    <div className="w-60 min-h-348.5 relative bg-bg border-r border-border">
+      {/* STREAM */}
+      <div className="w-40 h-4 left-27.25 top-12.25 absolute justify-center text-brand text-3xl font-bold font-['Inter'] leading-8">
+        STREAM
+      </div>
+
+      {/* Logo */}
+      <img
+        className="w-20 h-20 -left-1 -top-1 absolute"
+        src="/images/navbar/8jj.png"
+        alt="8jj"
+        draggable={false}
+      />
+
+      {/* SPORT */}
+      <div className="w-36 h-10 left-7.5 top-[27.94px] absolute">
+        <div className="w-24 h-7 left-25.5 top-0 absolute">
+          <div className="w-28 h-4 left-[-58.82px] top-[1.55px] absolute justify-center text-text text-3xl font-bold font-['Inter'] leading-8">
+            SPORT
+          </div>
         </div>
       </div>
 
-      <nav className="space-y-1">
-        {nav.map((item) => {
-          const Icon = item.icon;
-          const active =
-            pathname === item.href ||
-            (item.href.startsWith("/live") && pathname.startsWith("/live")) ||
-            (item.href.startsWith("/news") && pathname.startsWith("/news"));
+      {/* Nav */}
+      {NAV.map((item) => {
+        const active = isActive(pathname, item.href);
+        const Icon = item.Icon;
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={clsx(
-                "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition",
-                active
-                  ? "bg-cyan-500/15 border border-cyan-400/25"
-                  : "hover:bg-white/5"
-              )}
-            >
-              <Icon className="h-4 w-4 text-slate-200" />
-              <span className="text-slate-100">{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
+        // tokenized colors:
+        // - active: bg-brand + text-text (white)
+        // - inactive: transparent + text-muted
+        const bg = active ? "bg-brand" : "bg-transparent";
+        const fg = active ? "text-text" : "text-muted";
 
-      <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3">
-        <div className="text-xs text-slate-300">EN</div>
-        <div className="mt-2 flex gap-2">
+        return (
           <Link
-            href="/login"
-            className="flex-1 rounded-lg bg-white/10 px-3 py-2 text-center text-xs hover:bg-white/15"
+            key={item.href}
+            href={item.href}
+            className={clsx("w-52 h-12 left-2.75 absolute rounded-xl", bg, fg)}
+            style={{ top: item.top }}
           >
-            Login
+            {/* Icon (matches text color because Lucide uses currentColor) */}
+            <Icon
+              className="w-5 h-5 left-4 top-3.5 absolute select-none pointer-events-none"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+
+            {/* Label */}
+            <div className="left-12 top-3 absolute h-6">
+              <div
+                className={clsx(
+                  "absolute left-0 top-0.5 justify-center text-sm font-['Inter'] leading-6 whitespace-nowrap",
+                  item.fontWeight ?? "font-normal"
+                )}
+              >
+                {item.label}
+              </div>
+            </div>
           </Link>
-          <Link
-            href="/signup"
-            className="flex-1 rounded-lg bg-cyan-500/25 border border-cyan-400/25 px-3 py-2 text-center text-xs hover:bg-cyan-500/30"
-          >
-            Sign up
-          </Link>
-        </div>
-      </div>
-    </aside>
+        );
+      })}
+    </div>
   );
 }

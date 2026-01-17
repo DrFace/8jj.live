@@ -1,0 +1,30 @@
+:root {
+    /* Brand */
+    --brand: #00d9ff;
+
+    /* App surfaces */
+    --bg: #0a0e27;
+    --panel: #0f1533;
+    --border: #252a45;
+
+    /* Text */
+    --text: #ffffff;
+    --muted: #9ca3af;
+    --muted-2: #6b7280;
+
+    /* Effects */
+    --radius-xl: 12px;
+    --glass-bg: color-mix(in oklab, white 6%, transparent);
+    --glass-border: color-mix(in oklab, white 15%, transparent);
+}
+
+/* Optional: keep a “light mode” ready */
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #ffffff;
+        --text: #171717;
+        --border: #e5e7eb;
+        --muted: #6b7280;
+        --muted-2: #9ca3af;
+    }
+}

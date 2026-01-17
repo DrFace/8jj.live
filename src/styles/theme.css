@@ -1,0 +1,26 @@
+:root {
+    /* Brand */
+    --brand: #00d9ff;
+
+    /* Sidebar / App background */
+    --bg: #0a0e27;
+
+    /* Borders / panels */
+    --border: #252a45;
+
+    /* Text */
+    --text: #ffffff;
+    --muted: #9ca3af;
+    --muted-2: #6b7280;
+
+    /* Common UI */
+    --radius: 12px;
+}
+
+/* Optional: if you later support light mode */
+.light {
+    --bg: #ffffff;
+    --text: #0a0e27;
+    --border: #e5e7eb;
+    --muted: #6b7280;
+}
