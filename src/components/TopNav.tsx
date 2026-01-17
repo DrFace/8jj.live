@@ -21,9 +21,9 @@ export default function TopNav({
       >
         {/* Left banner image (Figma: 932 x 52) */}
         <img
-          src="/images/topnav/topnav.png"
+          src="/images/topnav/topnav.gif"
           alt=""
-          className="absolute left-0 top-0 h-13 w-233 object-cover pointer-events-none select-none"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
           draggable={false}
         />
 
@@ -96,20 +96,6 @@ export default function TopNav({
           </Link>
         </div>
       </header>
-
-      {/* Optional page title area */}
-      {(title || subtitle) && (
-        <div className="px-1">
-          {title && (
-            <h1 className="text-text text-2xl font-semibold leading-tight">
-              {title}
-            </h1>
-          )}
-          {subtitle && (
-            <p className="text-muted text-sm leading-6">{subtitle}</p>
-          )}
-        </div>
-      )}
     </div>
   );
 }
