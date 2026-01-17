@@ -21,9 +21,9 @@ export default function TopNav({
       >
         {/* Left banner image (Figma: 932 x 52) */}
         <img
-          src="/images/topnav/topnav.jpeg"
+          src="/images/topnav/8jj.gif"
           alt=""
-          className="absolute left-0 top-0 h-13 w-233 object-cover pointer-events-none select-none"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
           draggable={false}
         />
 
@@ -96,8 +96,6 @@ export default function TopNav({
           </Link>
         </div>
       </header>
-
-     
     </div>
   );
 }
