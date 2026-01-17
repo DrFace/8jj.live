@@ -1,5 +1,5 @@
 import Sidebar from "./Sidebar";
-import TopBar from "./TopBar";
+import TopBar from "./TopNav";
 import Footer from "./Footer";
 
 export default function AppShell({
@@ -12,11 +12,11 @@ export default function AppShell({
   subtitle?: string;
 }) {
   return (
-    <div className="min-h-screen bg-app">
-      {/* Use full screen width; no tight max-width to avoid fractional rounding */}
+    <div className="min-h-screen bg-bg text-text">
+      {/* full width; avoid fractional rounding */}
       <div className="w-full px-6 py-6 overflow-x-hidden">
-        <div className="grid grid-cols-[280px_minmax(0,1fr)] gap-6 items-start">
-          <div className="sticky top-6 h-[calc(100vh-48px)]">
+        <div className="grid grid-cols-[240px_minmax(0,1fr)] gap-6 items-start">
+          <div>
             <Sidebar />
           </div>
 
