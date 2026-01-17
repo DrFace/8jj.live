@@ -16,7 +16,7 @@ export default function TopNav({
         className={clsx(
           "relative w-full h-20",
           "bg-[linear-gradient(0deg,rgba(3.65,112.15,162.43,0.20)_0%,rgba(3.65,112.15,162.43,0.20)_100%),linear-gradient(90deg,rgba(51,195,234,0.90)_78%,rgba(11.63,21.90,86.04,0.90)_100%)]",
-          "border-b border-white/5"
+          "border-b border-white/5",
         )}
       >
         {/* Left banner image (Figma: 932 x 52) */}
@@ -81,8 +81,7 @@ export default function TopNav({
             className={clsx(
               "h-8.5 px-3 rounded-xl inline-flex items-center gap-2",
               "bg-[#1A2342]",
-              // remove outline conflict: keep only outline-* utilities
-              "outline-1 outline outline-white/10"
+              "outline outline-white/10",
             )}
           >
             <img
