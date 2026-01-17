@@ -7,9 +7,6 @@ import type { LucideIcon } from "lucide-react";
 import {
   Home,
   Radio,
-  Target,
-  Goal,
-  Bolt,
   Video,
   Newspaper,
   Users,
@@ -24,7 +21,8 @@ import {
 type NavItem = {
   href: string;
   label: string;
-  Icon: LucideIcon;
+  Icon?: LucideIcon;
+  svgIcon?: string;
   top: number; // absolute top in px
   fontWeight?: "font-normal" | "font-medium";
 };
@@ -32,9 +30,27 @@ type NavItem = {
 const NAV: NavItem[] = [
   { href: "/", label: "Home", Icon: Home, top: 76 },
   { href: "/live/icc-world-cup-final", label: "Live", Icon: Radio, top: 126 },
-  { href: "/cricket", label: "Cricket", Icon: Target, top: 178 },
-  { href: "/football", label: "Football", Icon: Goal, top: 232 },
-  { href: "/basketball", label: "Basketball", Icon: Bolt, top: 285 },
+
+  // Custom SVG icons
+  {
+    href: "/cricket",
+    label: "Cricket",
+    svgIcon: "/images/navbar/c.svg",
+    top: 178,
+  },
+  {
+    href: "/football",
+    label: "Football",
+    svgIcon: "/images/navbar/f.svg",
+    top: 232,
+  },
+  {
+    href: "/basketball",
+    label: "Basketball",
+    svgIcon: "/images/navbar/b.svg",
+    top: 285,
+  },
+
   {
     href: "/highlights",
     label: "Highlights",
@@ -70,36 +86,30 @@ export default function Sidebar() {
 
   return (
     <div className="w-60 min-h-348.5 relative bg-bg border-r border-border">
-      {/* STREAM */}
-      <div className="w-40 h-4 left-27.25 top-12.25 absolute justify-center text-brand text-3xl font-bold font-['Inter'] leading-8">
-        STREAM
-      </div>
-
       {/* Logo */}
       <img
-        className="w-20 h-20 -left-1 -top-1 absolute"
+        className="w-20 h-20 left-[12px] top-[6px] absolute z-10"
         src="/images/navbar/8jj.png"
         alt="8jj"
         draggable={false}
       />
 
       {/* SPORT */}
-      <div className="w-36 h-10 left-7.5 top-[27.94px] absolute">
-        <div className="w-24 h-7 left-25.5 top-0 absolute">
-          <div className="w-28 h-4 left-[-58.82px] top-[1.55px] absolute justify-center text-text text-3xl font-bold font-['Inter'] leading-8">
-            SPORT
-          </div>
+      <div className="w-36 h-10 left-[92px] top-[18px] absolute z-10">
+        <div className="w-28 h-4 absolute text-text text-3xl font-bold font-['Inter'] leading-8">
+          SPORT
         </div>
+      </div>
+
+      {/* STREAM */}
+      <div className="w-40 h-4 left-[92px] top-[52px] absolute z-10 text-brand text-3xl font-bold font-['Inter'] leading-8">
+        STREAM
       </div>
 
       {/* Nav */}
       {NAV.map((item) => {
         const active = isActive(pathname, item.href);
-        const Icon = item.Icon;
 
-        // tokenized colors:
-        // - active: bg-brand + text-text (white)
-        // - inactive: transparent + text-muted
         const bg = active ? "bg-brand" : "bg-transparent";
         const fg = active ? "text-text" : "text-muted";
 
@@ -110,19 +120,38 @@ export default function Sidebar() {
             className={clsx("w-52 h-12 left-2.75 absolute rounded-xl", bg, fg)}
             style={{ top: item.top }}
           >
-            {/* Icon (matches text color because Lucide uses currentColor) */}
-            <Icon
-              className="w-5 h-5 left-4 top-3.5 absolute select-none pointer-events-none"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
+            {/* Icon */}
+            {item.svgIcon ? (
+              <span
+                className="w-5 h-5 left-4 top-3.5 absolute select-none pointer-events-none"
+                style={{
+                  WebkitMaskImage: `url(${item.svgIcon})`,
+                  maskImage: `url(${item.svgIcon})`,
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                  backgroundColor: "currentColor",
+                }}
+              />
+            ) : (
+              item.Icon && (
+                <item.Icon
+                  className="w-5 h-5 left-4 top-3.5 absolute select-none pointer-events-none"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+              )
+            )}
 
             {/* Label */}
             <div className="left-12 top-3 absolute h-6">
               <div
                 className={clsx(
-                  "absolute left-0 top-0.5 justify-center text-sm font-['Inter'] leading-6 whitespace-nowrap",
-                  item.fontWeight ?? "font-normal"
+                  "absolute left-0 top-0.5 text-sm font-['Inter'] leading-6 whitespace-nowrap",
+                  item.fontWeight ?? "font-normal",
                 )}
               >
                 {item.label}
