@@ -5,6 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import { clearAccessToken, getAccessToken } from "@/lib/auth/token";
+import { toast } from "@/lib/toast";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -51,9 +52,41 @@ function handleAuthError(error: AxiosError) {
     // Token is invalid/expired; remove it so the UI can re-auth
     clearAccessToken();
 
+    // Show toast notification
+    toast.error("Session expired", "Please log in again");
+
     if (onUnauthorized) {
       onUnauthorized({ status, message: "Unauthorized" });
     }
+  }
+}
+
+/**
+ * Global error handler that shows toast messages for API errors
+ */
+function handleGlobalError(error: AxiosError) {
+  const status = error.response?.status;
+  const data = error.response?.data as { message?: string; error?: string } | undefined;
+  
+  // Skip 401 - already handled by handleAuthError
+  if (status === 401) return;
+
+  // Extract error message
+  const errorMessage = data?.message || data?.error || error.message || "An error occurred";
+
+  // Show different toasts based on status
+  if (status === 403) {
+    toast.error("Access Denied", "You don't have permission to perform this action");
+  } else if (status === 404) {
+    toast.error("Not Found", errorMessage);
+  } else if (status === 500) {
+    toast.error("Server Error", "Something went wrong on our end. Please try again later");
+  } else if (status && status >= 400 && status < 500) {
+    toast.error("Request Failed", errorMessage);
+  } else if (!status) {
+    toast.error("Network Error", "Unable to connect to server. Check your internet connection");
+  } else {
+    toast.error("Error", errorMessage);
   }
 }
 
@@ -78,6 +111,7 @@ export function createApiClient(): AxiosInstance {
     (res) => res,
     (error: AxiosError) => {
       handleAuthError(error);
+      handleGlobalError(error);
       return Promise.reject(error);
     }
   );
